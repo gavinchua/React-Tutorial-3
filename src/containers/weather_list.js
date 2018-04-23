@@ -5,11 +5,18 @@ import GoogleMap from "../components/google_map";
 
 class WeatherList extends Component {
   renderWeather(cityData) {
-    console.log(cityData);
-    const name = cityData.city.name;
-    console.log(name);
+    //console.log(cityData);
+    // Gavin's fix
+    if (!cityData) {
+      return (
+        <tr className="notfound">
+          <td colSpan="4">City not found! Only cities in the US will work!</td>
+        </tr>
+      );
+    }
+
+    
     const temps = cityData.list.map(weather => weather.main.temp);
-    console.log(temps);
     const pressures = cityData.list.map(weather => weather.main.pressure);
     const humidities = cityData.list.map(weather => weather.main.humidity);
     const { lon, lat } = cityData.city.coord;
